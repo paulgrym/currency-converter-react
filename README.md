@@ -5,7 +5,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Demo
 You can find a demo [here](https://paulgrym.github.io/currency-converter-react/).
-Try it out using the instrucions from "How to use section".
+Try it out using the instrucions from "How to use" section.
 ## How to use
 1. Type in the "Kwota" field how much PLN you want to exchange.
 2. In "Waluta" field choose the currency for which you want to exchange your PLN - you can choose EUR, USD or CZK.
