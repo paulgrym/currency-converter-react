@@ -16,3 +16,10 @@ body {
   background-position:center;
   background-blend-mode: overlay;
 }
+
+#root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
