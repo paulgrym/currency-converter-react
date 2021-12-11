@@ -1,7 +1,7 @@
 import { useState } from "react";
-import "./style.css";
 import { Result } from "./Result";
 import { currencies } from "../currencies";
+import { StyledForm, StyledHeader, StyledLabel, StyledLabelText, StyledField, StyledButton } from "./styled";
 
 export const Form = () => {
   const [currency, setCurrency] = useState(currencies[0].short);
@@ -24,44 +24,42 @@ export const Form = () => {
   };
 
   return (
-    <form className="form" onSubmit={onFormSubmit}>
-      <h1 className="form__header">Przelicznik walut</h1>
+    <StyledForm onSubmit={onFormSubmit}>
+      <StyledHeader>Przelicznik walut</StyledHeader>
       <p>
-        <label className="form__label">
-          <span className="form__labelText">Kwota*:</span>
-          <input
+        <StyledLabel>
+          <StyledLabelText>Kwota*:</StyledLabelText>
+          <StyledField
             value={amount}
             onChange={(event) => setAmount(event.target.value)}
-            className="form__field"
             placeholder="Kwota w PLN"
             type="number"
             min="0.01"
             step="0.01"
             required
           />
-        </label>
+        </StyledLabel>
       </p>
       <p>
-        <label className="form__label">
-          <span className="form__labelText">Waluta*:</span>
-          <select
+        <StyledLabel>
+          <StyledLabelText>Waluta*:</StyledLabelText>
+          <StyledField as="select"
             value={currency}
             onChange={(event) => setCurrency(event.target.value)}
-            className="form__field"
             required>
             {currencies.map(currency => (
               <option value={currency.short} key={currency.short}>{currency.name}</option>
             ))}
-          </select>
-        </label>
+          </StyledField>
+        </StyledLabel>
       </p>
       <p>
-        <button className="form__button">Przelicz!</button>
+        <StyledButton>Przelicz!</StyledButton>
       </p>
       <Result result={result} />
       <p>
         * - pola wymagające uzupełniania
       </p>
-    </form>
+    </StyledForm>
   );
 };

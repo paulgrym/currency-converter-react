@@ -1,13 +1,13 @@
 import { Form } from "./Form";
 import { Clock } from "./Clock";
-import "./App.css";
+import { Container } from "./Container";
 
 function App() {
   return (
-    <div className="container">
+    <Container>
       <Clock />
       <Form />
-    </div>
+    </Container>
   );
 };
 

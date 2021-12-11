@@ -1,4 +1,6 @@
-.container {
+import styled from "styled-components";
+
+export const StyledContainer = styled.div`
   flex-basis: 700px;
   margin: 20px;
   padding: 40px;
@@ -6,4 +8,4 @@
   border-radius: 10px;
   background-color: white;
   box-shadow: 0px 0px 30px black;
-}
+`;
