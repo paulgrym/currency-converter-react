@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Result } from "./Result";
 import { currencies } from "../currencies";
-import { StyledForm, StyledHeader, StyledLabel, StyledLabelText, StyledField, StyledButton } from "./styled";
+import { StyledForm, Header, Label, LabelText, FormField, Button } from "./styled";
 
 export const Form = () => {
   const [currency, setCurrency] = useState(currencies[0].short);
@@ -25,11 +25,11 @@ export const Form = () => {
 
   return (
     <StyledForm onSubmit={onFormSubmit}>
-      <StyledHeader>Przelicznik walut</StyledHeader>
+      <Header>Przelicznik walut</Header>
       <p>
-        <StyledLabel>
-          <StyledLabelText>Kwota*:</StyledLabelText>
-          <StyledField
+        <Label>
+          <LabelText>Kwota*:</LabelText>
+          <FormField
             value={amount}
             onChange={(event) => setAmount(event.target.value)}
             placeholder="Kwota w PLN"
@@ -38,23 +38,23 @@ export const Form = () => {
             step="0.01"
             required
           />
-        </StyledLabel>
+        </Label>
       </p>
       <p>
-        <StyledLabel>
-          <StyledLabelText>Waluta*:</StyledLabelText>
-          <StyledField as="select"
+        <Label>
+          <LabelText>Waluta*:</LabelText>
+          <FormField as="select"
             value={currency}
             onChange={(event) => setCurrency(event.target.value)}
             required>
             {currencies.map(currency => (
               <option value={currency.short} key={currency.short}>{currency.name}</option>
             ))}
-          </StyledField>
-        </StyledLabel>
+          </FormField>
+        </Label>
       </p>
       <p>
-        <StyledButton>Przelicz!</StyledButton>
+        <Button>Przelicz!</Button>
       </p>
       <Result result={result} />
       <p>

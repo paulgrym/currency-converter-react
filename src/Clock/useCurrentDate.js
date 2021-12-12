@@ -12,5 +12,6 @@ export const useCurrentDate = () => {
       clearInterval(intervalId);
     }
   }, []);
+
   return date;
 }
