@@ -1,20 +1,21 @@
 import { useState } from "react";
 import { Result } from "./Result";
-import { currencies } from "../currencies";
 import { StyledForm, Header, Label, LabelText, FormField, Button } from "./styled";
+import { useRatesDate } from "./useRatesData";
 
 export const Form = () => {
-  const [currency, setCurrency] = useState(currencies[0].short);
+  const [currency, setCurrency] = useState("USD");
   const [amount, setAmount] = useState("");
   const [result, setResult] = useState();
+  const ratesData = useRatesDate();
 
   const calculateResult = () => {
-    const rate = currencies.find(({ short }) => short === currency).rate;
+    const rate = ratesData.rates[currency];
 
     setResult({
       currency,
       startAmount: +amount,
-      endAmount: amount / rate
+      endAmount: amount * rate
     });
   };
 
@@ -24,42 +25,60 @@ export const Form = () => {
   };
 
   return (
+
     <StyledForm onSubmit={onFormSubmit}>
       <Header>Przelicznik walut</Header>
-      <p>
-        <Label>
-          <LabelText>Kwota*:</LabelText>
-          <FormField
-            value={amount}
-            onChange={(event) => setAmount(event.target.value)}
-            placeholder="Kwota w PLN"
-            type="number"
-            min="0.01"
-            step="0.01"
-            required
-          />
-        </Label>
-      </p>
-      <p>
-        <Label>
-          <LabelText>Waluta*:</LabelText>
-          <FormField as="select"
-            value={currency}
-            onChange={(event) => setCurrency(event.target.value)}
-            required>
-            {currencies.map(currency => (
-              <option value={currency.short} key={currency.short}>{currency.name}</option>
-            ))}
-          </FormField>
-        </Label>
-      </p>
-      <p>
-        <Button>Przelicz!</Button>
-      </p>
-      <Result result={result} />
-      <p>
-        * - pola wymagające uzupełniania
-      </p>
+
+      {
+        (() => {
+          if (ratesData.state === "error") {
+            return <p>Ups...coś poszło nie tak. Sprawdź, czy masz połączenie z internetem.</p>
+          } else if (ratesData.state !== "success") {
+            return <p>Trwa ładowanie kursów walut z Europejskiego Banku Centralnego.</p>
+          } else {
+            return <>
+              <p>
+                <Label>
+                  <LabelText>Kwota*:</LabelText>
+                  <FormField
+                    value={amount}
+                    onChange={(event) => setAmount(event.target.value)}
+                    placeholder="Kwota w PLN"
+                    type="number"
+                    min="0.01"
+                    step="0.01"
+                    required
+                  />
+                </Label>
+              </p>
+              <p>
+                <Label>
+                  <LabelText>Waluta*:</LabelText>
+                  <FormField as="select"
+                    value={currency}
+                    onChange={(event) => setCurrency(event.target.value)}
+                    required>
+                    {(Object.keys(ratesData.rates)).map(currency => (
+                      <option value={currency} key={currency}>{currency}</option>
+                    ))}
+                  </FormField>
+                </Label>
+              </p>
+              <p>
+                <Button>Przelicz!</Button>
+              </p>
+              <Result result={result} />
+              <p>
+                * - pola wymagające uzupełniania
+              </p>
+              <p>
+                Kursy walut pobierane są z Europejskiego Banku Centralnego. <br />
+                Aktualne na dzień: <strong>{ratesData.date}</strong>
+              </p>
+            </>
+          }
+        })()
+      }
     </StyledForm>
   );
 };
