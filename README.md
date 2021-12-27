@@ -1,6 +1,8 @@
 # Currency converter
 Hello!
-This is a simple currency converter. With its help you can convert PLN to EUR, USD or CZK. This task is a part of the Frontend Developer course that I'm participating.
+This is a simple currency converter. <br>
+With its help you can convert PLN to EUR, USD, CZK and few others currencies. Every time you enter or reload the website, current exchange rates are taken from the external [API](https://exchangerate.host/#/).<br>
+This task is a part of the Frontend Developer course that I'm participating.
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Demo
@@ -8,7 +10,7 @@ You can find a demo [here](https://paulgrym.github.io/currency-converter-react/)
 Try it out using the instrucions from "How to use" section.
 ## How to use
 1. Type in the "Kwota" field how much PLN you want to exchange.
-2. In "Waluta" field choose the currency for which you want to exchange your PLN - you can choose EUR, USD or CZK.
+2. In "Waluta" field choose the currency for which you want to exchange your PLN.
 3. Click "Przelicz" button to see the result.
 ## Available Scripts
 
@@ -44,7 +46,10 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 
 ## Technologies
 - HTML
-- CSS (Flex)
-- BEM convention
+- CSS
 - React
 - Create-react-app
+- React Hooks
+- Styled Components
+- Fetch
+- Async/await
