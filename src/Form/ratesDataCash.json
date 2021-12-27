@@ -1,0 +1,19 @@
+{
+  "motd": {
+    "msg": "If you or your company use this project or like what we doing, please consider backing us so we can continue maintaining and evolving this project.",
+    "url": "https://exchangerate.host/#/donate"
+  },
+  "success": true,
+  "base": "PLN",
+  "date": "2021-12-20",
+  "rates": {
+    "AUD": 0.341535,
+    "CAD": 0.313249,
+    "CHF": 0.224311,
+    "CZK": 5.439767,
+    "EUR": 0.2159,
+    "GBP": 0.183754,
+    "JPY": 27.554417,
+    "USD": 0.242938
+  }
+}
