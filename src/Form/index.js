@@ -1,6 +1,16 @@
 import { useState } from "react";
 import { Result } from "./Result";
-import { StyledForm, Header, Label, LabelText, FormField, Button } from "./styled";
+import {
+  StyledForm,
+  Header,
+  Label,
+  LabelText,
+  FormField,
+  Button,
+  Spinner,
+  LoadingText,
+  ErrorText
+} from "./styled";
 import { useRatesDate } from "./useRatesData";
 
 export const Form = () => {
@@ -32,50 +42,63 @@ export const Form = () => {
       {
         (() => {
           if (ratesData.state === "error") {
-            return <p>Ups...coś poszło nie tak. Sprawdź, czy masz połączenie z internetem.</p>
+            return (
+              <ErrorText>
+                Ups...coś poszło nie tak. &#128531; <br />
+                Sprawdź, czy masz połączenie z internetem. <br />
+                Jeśli tak, spróbuj ponownie później.
+              </ErrorText>
+            )
           } else if (ratesData.state !== "success") {
-            return <p>Trwa ładowanie kursów walut z Europejskiego Banku Centralnego.</p>
+            return (
+              <>
+                <LoadingText>Trwa ładowanie kursów walut z Europejskiego Banku Centralnego.</LoadingText>
+                <Spinner></Spinner>
+              </>
+            )
           } else {
-            return <>
-              <p>
-                <Label>
-                  <LabelText>Kwota*:</LabelText>
-                  <FormField
-                    value={amount}
-                    onChange={(event) => setAmount(event.target.value)}
-                    placeholder="Kwota w PLN"
-                    type="number"
-                    min="0.01"
-                    step="0.01"
-                    required
-                  />
-                </Label>
-              </p>
-              <p>
-                <Label>
-                  <LabelText>Waluta*:</LabelText>
-                  <FormField as="select"
-                    value={currency}
-                    onChange={(event) => setCurrency(event.target.value)}
-                    required>
-                    {(Object.keys(ratesData.rates)).map(currency => (
-                      <option value={currency} key={currency}>{currency}</option>
-                    ))}
-                  </FormField>
-                </Label>
-              </p>
-              <p>
-                <Button>Przelicz!</Button>
-              </p>
-              <Result result={result} />
-              <p>
-                * - pola wymagające uzupełniania
-              </p>
-              <p>
-                Kursy walut pobierane są z Europejskiego Banku Centralnego. <br />
-                Aktualne na dzień: <strong>{ratesData.date}</strong>
-              </p>
-            </>
+            return (
+              <>
+                <p>
+                  <Label>
+                    <LabelText>Kwota*:</LabelText>
+                    <FormField
+                      value={amount}
+                      onChange={(event) => setAmount(event.target.value)}
+                      placeholder="Kwota w PLN"
+                      type="number"
+                      min="0.01"
+                      step="0.01"
+                      required
+                    />
+                  </Label>
+                </p>
+                <p>
+                  <Label>
+                    <LabelText>Waluta*:</LabelText>
+                    <FormField as="select"
+                      value={currency}
+                      onChange={(event) => setCurrency(event.target.value)}
+                      required>
+                      {(Object.keys(ratesData.rates)).map(currency => (
+                        <option value={currency} key={currency}>{currency}</option>
+                      ))}
+                    </FormField>
+                  </Label>
+                </p>
+                <p>
+                  <Button>Przelicz!</Button>
+                </p>
+                <Result result={result} />
+                <p>
+                  * - pola wymagające uzupełniania
+                </p>
+                <p>
+                  Kursy walut pobierane są z Europejskiego Banku Centralnego. <br />
+                  Aktualne na dzień: <strong>{ratesData.date}</strong>
+                </p>
+              </>
+            )
           }
         })()
       }
