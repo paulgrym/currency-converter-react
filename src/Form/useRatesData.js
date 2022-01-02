@@ -8,9 +8,9 @@ export const useRatesDate = () => {
       try {
         const currenciesAPIUrl = [
           `https://api.exchangerate.host/latest?base=PLN&symbols=EUR,USD,CHF,GBP,JPY,CZK,AUD,CAD&v=${new Date().getTime()}`,
-          "./src/Form/ratesDataCash.json"
+          "currency-converter-react/ratesDataCash.json"
         ];
-        const response = await fetch(currenciesAPIUrl[0]);
+        const response = await fetch(currenciesAPIUrl[1]);
         if (!response.ok) {
           throw new Error(response.statusText);
         }
