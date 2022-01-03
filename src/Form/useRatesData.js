@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useState, useEffect } from "react";
 
 export const useRatesDate = () => {
@@ -8,14 +9,9 @@ export const useRatesDate = () => {
       try {
         const currenciesAPIUrl = `https://api.exchangerate.host/latest?base=PLN&symbols=EUR,USD,CHF,GBP,JPY,CZK,AUD,CAD&v=${new Date().getTime()}`;
 
-        const response = await fetch(currenciesAPIUrl);
-        if (!response.ok) {
-          throw new Error(response.statusText);
-        }
-
-        const { date, rates } = await response.json();
-        console.log({ date, rates });
-
+        const response = await axios.get(currenciesAPIUrl);
+        const { date, rates } = await response.data;
+        
         if (!rates) {
           throw new Error(response.statusText);
         }
