@@ -6,11 +6,9 @@ export const useRatesDate = () => {
   useEffect(() => {
     const getRates = async () => {
       try {
-        const currenciesAPIUrl = [
-          `https://api.exchangerate.host/latest?base=PLN&symbols=EUR,USD,CHF,GBP,JPY,CZK,AUD,CAD&v=${new Date().getTime()}`,
-          "currency-converter-react/ratesDataCash.json"
-        ];
-        const response = await fetch(currenciesAPIUrl[1]);
+        const currenciesAPIUrl = `https://api.exchangerate.host/latest?base=PLN&symbols=EUR,USD,CHF,GBP,JPY,CZK,AUD,CAD&v=${new Date().getTime()}`;
+
+        const response = await fetch(currenciesAPIUrl);
         if (!response.ok) {
           throw new Error(response.statusText);
         }
@@ -29,7 +27,7 @@ export const useRatesDate = () => {
         });
 
       } catch (error) {
-        console.error("Sth bad", error);
+        console.error("Sth bad happened", error);
         setRatesData({ state: "error" });
       }
     }
