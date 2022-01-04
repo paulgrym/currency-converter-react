@@ -10,8 +10,8 @@ export const useRatesDate = () => {
         const currenciesAPIUrl = `https://api.exchangerate.host/latest?base=PLN&symbols=EUR,USD,CHF,GBP,JPY,CZK,AUD,CAD&v=${new Date().getTime()}`;
 
         const response = await axios.get(currenciesAPIUrl);
-        const { date, rates } = await response.data;
-        
+        const { date, rates } = response.data;
+
         if (!rates) {
           throw new Error(response.statusText);
         }
