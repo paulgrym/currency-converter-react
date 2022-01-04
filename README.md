@@ -12,6 +12,7 @@ Try it out using the instrucions from "How to use" section.
 1. Type in the "Kwota" field how much PLN you want to exchange.
 2. In "Waluta" field choose the currency for which you want to exchange your PLN.
 3. Click "Przelicz" button to see the result.
+![How to use gif ](public/images/Animation.gif)
 ## Available Scripts
 
 In the project directory, you can run:
@@ -51,5 +52,5 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 - Create-react-app
 - React Hooks
 - Styled Components
-- Fetch
+- Axios
 - Async/await
